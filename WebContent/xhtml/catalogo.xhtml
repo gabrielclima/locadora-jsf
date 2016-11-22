@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="_modelo.xhtml">
+
+	<ui:define name="titulo">Catalogo de Filmes</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="form">
+
+			<br />
+			<p:dataTable id="lista" var="filme" value="#{filmeMB.filmes}"
+				paginator="true" rows="15" rowsPerPageTemplate="5,10,15"
+				selectionMode="single" rendered="#{not empty filmeMB.filmes}">
+
+				<f:facet name="header">
+					<h:outputText value="Lista de Filmes Disponíveis" />
+				</f:facet>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Nome" />
+					</f:facet>
+					<h:outputText value="#{filme.nomeFilme}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Descrição" />
+					</f:facet>
+					<h:outputText value="#{filme.descricao}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Alugar" />
+					</f:facet>
+					<h:panelGroup>
+						<p:commandButton type="button" value="Alugar"
+							onclick="conf#{filme.registro}.show()" image="ui-icon-close">
+						</p:commandButton>
+
+						<p:confirmDialog message="Deseja alugar este filme?"
+							showEffect="bounce" hideEffect="explode" 
+							header="Confirmação Aluguel" severity="alert"
+							widgetVar="conf#{filme.registro}">
+
+							<p:commandButton ajax="false" type="push" value="Sim"
+								action="#{filmeMB.alugarFilme}" immediate="true"
+								image="ui-icon-check">
+								<f:param value="#{filme.registro}" name="itemId" />
+							</p:commandButton>
+
+							<p:commandButton value="Não" onclick="conf#{filme.registro}.hide()"
+								type="button" image="ui-icon-close" />
+						</p:confirmDialog>
+
+					</h:panelGroup>
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>
