@@ -27,12 +27,9 @@
 					<f:facet name="footer">
 						<h:panelGroup layout="block" style="text-align: center">
 
-							<!-- <p:captcha id="codigoImg" label="Captcha" language="pt"
-								theme="white"
-								requiredMessage="As palavras da imagem não foram digitadas." />  -->
 							<br />
 							<p:commandButton ajax="false" id="btnEnviar"
-								action="#{loginMB.autenticar}" value="Enviar"></p:commandButton>
+								action="#{loginMB.autenticar(login)}" value="Enviar"></p:commandButton>
 
 						</h:panelGroup>
 					</f:facet>

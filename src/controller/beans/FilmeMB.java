@@ -8,13 +8,14 @@ import javax.faces.bean.ManagedProperty;
 import model.dao.FilmeDAO;
 import model.dao.LocacaoDAO;
 import model.domain.Filme;
+import model.domain.Locacao;
 
 @ManagedBean(name = "filmeMB")
-public class FIlmeMB {
+public class FilmeMB {
 	
 	private Filme filme = new Filme();
 	private FilmeDAO filmeDao = new FilmeDAO();
-	private LocacaoDAO locacaoDAO = new LocacaoDAO();
+	private LocacaoDAO LocacaoDAO = new LocacaoDAO();
 	
 	@ManagedProperty("#{loginMB.login}")
 	private String login;
@@ -23,7 +24,7 @@ public class FIlmeMB {
 	
 	public List<Filme> getFilmes() {
 		if (this.filmes == null) 
-			this.filmes = this.filmeDao.lerTodos();
+			this.filmes = this.filmeDao.obterFilmesDisponiveis();
 		
 		return filmes;
 	}
@@ -44,9 +45,19 @@ public class FIlmeMB {
 		return "catalogo";
 	}
 	
-	public String alugarFilme(){
+	public String alugarFilme(Filme filme){		
+		filme.setDisponivel(false);
+		filmeDao.alterar(filme);
 		
-		return "alugarFilme";
+		return "catalogo.jsf";
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 }

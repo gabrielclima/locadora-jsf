@@ -28,15 +28,16 @@ public class Filme {
 
 	private Date dataLancamento;
 	private String categoria;
+	private boolean disponivel;
 	
 	@OneToMany(mappedBy="filme", cascade = CascadeType.ALL, fetch= FetchType.LAZY)
 	private List<Locacao> locacao;
 	
 	public Filme(String nomeFilme, String descricao, Date dataLancamento, String categoria) {
 		super();
-		this.registro = registro;
 		this.nomeFilme = nomeFilme;
 		this.descricao = descricao;
+		this.disponivel = true; 
 		this.dataLancamento = dataLancamento;
 		this.categoria = categoria;
 	}
@@ -85,6 +86,14 @@ public class Filme {
 		this.dataLancamento = dataLancamento;
 	}
 	
+	public boolean isDisponivel() {
+		return disponivel;
+	}
+
+	public void setDisponivel(boolean disponivel) {
+		this.disponivel = disponivel;
+	}
+
 	public String getDataFormatada() {
 		if (this.dataLancamento == null)
 			return "";

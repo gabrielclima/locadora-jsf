@@ -44,8 +44,7 @@ public class CadastroFilmesMB {
 		return "catalogo";
 	}
 	
-	public String alugarFilme(){
-		
+	public String alugarFilme(){		
 		return "alugarFilme";
 	}
 

@@ -31,6 +31,12 @@ public class Locacao {
 	public Locacao() {
 		super();
 	}
+	
+	public Locacao(Cliente cliente, Filme filme){
+		super();
+		this.cliente = cliente;
+		this.filme = filme;
+	}
 
 	public Filme getFilme(Filme filme) {
 		return filme;

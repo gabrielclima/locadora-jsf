@@ -43,7 +43,7 @@
 					</f:facet>
 					<h:panelGroup>
 						<p:commandButton type="button" value="Alugar"
-							onclick="conf#{filme.registro}.show()" image="ui-icon-close">
+							onclick="conf#{filme.registro}.show()" image="ui-icon-cart">
 						</p:commandButton>
 
 						<p:confirmDialog message="Deseja alugar este filme?"
@@ -52,7 +52,7 @@
 							widgetVar="conf#{filme.registro}">
 
 							<p:commandButton ajax="false" type="push" value="Sim"
-								action="#{filmeMB.alugarFilme}" immediate="true"
+								action="#{filmeMB.alugarFilme(filme)}" immediate="true"
 								image="ui-icon-check">
 								<f:param value="#{filme.registro}" name="itemId" />
 							</p:commandButton>
