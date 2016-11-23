@@ -22,8 +22,6 @@ public class LoginMB implements Serializable{
 	private String senha;
 	private String login;
 	
-	private UsuarioDAO usuarioDao;
-	
 	public String getSenha() {
 		return senha;
 	}
@@ -47,13 +45,13 @@ public class LoginMB implements Serializable{
 		List<Filme> filmes = dao.lerTodos();
 		
 		if (filmes.isEmpty()){
-			Filme filme = new Filme("Alto da Compadecida", "Um filme muito legal", null, "Comédia");
+			Filme filme = new Filme("Alto da Compadecida", "Um filme muito legal", null, "Comï¿½dia");
 			dao.salvar(filme);
 			filme = new Filme("Terror na Casa Branca", "Uma loucura", null, "Terror");
 			dao.salvar(filme);
-			filme = new Filme("Sniper Americano", "Um cara que dá tiros", null, "Ação");
+			filme = new Filme("Sniper Americano", "Um cara que dï¿½ tiros", null, "Aï¿½ï¿½o");
 			dao.salvar(filme);
-			filme = new Filme("A feiticeira", "Um filme de magia", null, "Palhaçada");
+			filme = new Filme("A feiticeira", "Um filme de magia", null, "Palhaï¿½ada");
 			dao.salvar(filme);
 		}
 		
@@ -73,10 +71,11 @@ public class LoginMB implements Serializable{
 	{
 		String paginaRetorno;
 		
+		UsuarioDAO usuarioDao = new UsuarioDAO();
 		Usuario usuario = usuarioDao.obterPorLogin(this.getLogin());
 		
 		if (usuario == null){
-			JSFUtil.retornarMensagemErro("Esse usuário não existe.", null, null);
+			JSFUtil.retornarMensagemErro("Esse usuï¿½rio nï¿½o existe.", null, null);
 			paginaRetorno = "login";
 		}
 		else
