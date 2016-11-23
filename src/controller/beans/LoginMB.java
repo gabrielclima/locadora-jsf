@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import controller.utils.JSFUtil;
 import model.dao.FilmeDAO;
@@ -37,6 +38,11 @@ public class LoginMB implements Serializable{
 	public void setLogin(String login) {
 		this.login = login;
 	}
+	
+	public Usuario getUsuario(){
+		Usuario usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+		return usuario;
+	}
 
 	@PostConstruct
 	public void preencherBanco(){
@@ -45,13 +51,13 @@ public class LoginMB implements Serializable{
 		List<Filme> filmes = dao.lerTodos();
 		
 		if (filmes.isEmpty()){
-			Filme filme = new Filme("Alto da Compadecida", "Um filme muito legal", null, "Com�dia");
+			Filme filme = new Filme("Alto da Compadecida", "Um filme muito legal", null, "Comedia");
 			dao.salvar(filme);
 			filme = new Filme("Terror na Casa Branca", "Uma loucura", null, "Terror");
 			dao.salvar(filme);
-			filme = new Filme("Sniper Americano", "Um cara que d� tiros", null, "A��o");
+			filme = new Filme("Sniper Americano", "Um cara que da tiros", null, "Acao");
 			dao.salvar(filme);
-			filme = new Filme("A feiticeira", "Um filme de magia", null, "Palha�ada");
+			filme = new Filme("A feiticeira", "Um filme de magia", null, "Palhacada");
 			dao.salvar(filme);
 		}
 		
@@ -75,17 +81,20 @@ public class LoginMB implements Serializable{
 		Usuario usuario = usuarioDao.obterPorLogin(this.getLogin());
 		
 		if (usuario == null){
-			JSFUtil.retornarMensagemErro("Esse usu�rio n�o existe.", null, null);
+			JSFUtil.retornarMensagemErro("Esse usuario nao existe.", null, null);
 			paginaRetorno = "login";
 		}
-		else
+		else {
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", usuario);
 			paginaRetorno = "catalogo";
+		}
 		
 		return paginaRetorno;
 	}
 
 	public String acaoLogout()
 	{
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		return "login";
 	}
 
