@@ -6,8 +6,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
-	<title><ui:insert name="titulo">Locadora</ui:insert>
-	</title>
+	<title><ui:insert name="titulo">Locadora</ui:insert></title>
 	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 	<link rel="stylesheet" type="text/css" href="../css/estilo.css" />
 	<script type="text/javascript" src="../js/primefaces.js" />
@@ -23,11 +22,14 @@
 				<h:form id="formHome">
 
 					<p:toolbar>
-						<p:toolbarGroup align="left">
-							<p:commandButton ajax="false" type="push" value="Início"
-								action="home" image="ui-icon-home" />
 
-							<ui:insert name="opcoesMenu" />
+						<p:toolbarGroup rendered="#{loginMB.usuario.admin}" align="left">
+							<p:menubar>
+								<p:submenu label="Usuários" action="#{usuariosMB.listarUsuarios}" icon="ui-icon ui-icon-person">
+								</p:submenu>
+								<p:submenu label="Filmes" icon="ui-icon ui-icon-note">
+								</p:submenu>
+							</p:menubar>
 						</p:toolbarGroup>
 
 						<p:toolbarGroup align="right">
@@ -36,7 +38,7 @@
 
 							<p:divider />
 							<p:commandButton ajax="false" type="push" value="Sair"
-								action="#{loginMB.acaoLogout}" icon="ui-icon ui-icon-close"/>
+								action="#{loginMB.acaoLogout}" icon="ui-icon ui-icon-close" />
 						</p:toolbarGroup>
 
 					</p:toolbar>
@@ -47,11 +49,11 @@
 					<ui:insert name="titulo" />
 				</div>
 
-
 				<div align="left">
 					<p:messages id="msgs" showSummary="true" showDetail="false" />
 				</div>
 				<br />
+				
 			</div>
 
 			<div id="conteudo" align="center">
