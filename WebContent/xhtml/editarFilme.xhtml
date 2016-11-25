@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="_modelo.xhtml">
+
+	<ui:define name="titulo">Editar Filme</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="form">
+			<h:inputHidden id="idFilme" value="#{ctrlFilmesMB.filme.registro}" />
+			<h:panelGrid columns="2">
+
+				<h:outputLabel value="Nome:" for="nome"></h:outputLabel>
+				<p:inputText id="login" value="#{ctrlFilmesMB.filme.nomeFilme}"
+					required="true" requiredMessage="Este campo é obrigatório"></p:inputText>
+
+				<h:outputLabel value="Descricao:" for="login"></h:outputLabel>
+				<p:inputText id="descricao" value="#{ctrlFilmesMB.filme.descricao}"
+					required="true" requiredMessage="O campo descrição é obrigatório."></p:inputText>
+
+				<h:outputLabel value="Nome:" for="categoria"></h:outputLabel>
+				<p:inputText id="categoria" value="#{ctrlFilmesMB.filme.categoria}"
+					required="true" requiredMessage="O campo categoria é obrigatorio."></p:inputText>
+
+				<f:facet name="footer">
+					<h:panelGroup layout="block" style="text-align: center">
+						<p:commandButton ajax="false" id="btnSalvar"
+							action="#{ctrlFilmesMB.salvarFilme}" value="Salvar"></p:commandButton>
+						<p:commandButton ajax="false" id="btnCancelar"
+							action="#{ctrlFilmesMB.cancelar}" immediate="true"
+							value="Cancelar"></p:commandButton>
+					</h:panelGroup>
+				</f:facet>
+
+			</h:panelGrid>
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>

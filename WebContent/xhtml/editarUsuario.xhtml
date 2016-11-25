@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="_modelo.xhtml">
+
+	<ui:define name="titulo">Editar Usuário</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="form">
+			<h:inputHidden id="idUsuario" value="#{usuarioMB.usuario.id}" />
+			<h:panelGrid columns="2">
+
+				<h:outputLabel value="Login:" for="login"></h:outputLabel>
+				<p:inputText id="login" value="#{usuarioMB.usuario.login}"
+					required="true" requiredMessage="O Campo Login é obrigatório."></p:inputText>
+
+				<h:outputLabel value="Senha:" for="senha"></h:outputLabel>
+				<p:password feedback="false" id="senha"
+					value="#{usuarioMB.usuario.senha}" required="true"
+					requiredMessage="O Campo Senha é obrigatório."></p:password>
+
+				<h:outputLabel value="Nome:" for="nome"></h:outputLabel>
+				<p:inputText id="nome" value="#{usuarioMB.usuario.nome}"
+					required="true" requiredMessage="O Campo Nome é obrigatório."></p:inputText>
+
+				<f:facet name="footer">
+					<h:panelGroup layout="block" style="text-align: center">
+						<p:commandButton ajax="false" id="btnSalvar"
+							action="#{usuarioMB.salvarUsuario}" value="Salvar"></p:commandButton>
+						<p:commandButton ajax="false" id="btnCancelar"
+							action="#{usuarioMB.cancelar}" immediate="true" value="Cancelar"></p:commandButton>
+					</h:panelGroup>
+				</f:facet>
+
+			</h:panelGrid>
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>
